@@ -25,7 +25,6 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
-        <TextInput label="rerererre" source="rerererre" />
       </SimpleForm>
     </Create>
   );
