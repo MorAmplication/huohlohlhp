@@ -9,5 +9,4 @@ export type UserOrderByInput = {
   username?: SortOrder;
   password?: SortOrder;
   roles?: SortOrder;
-  rerererre?: SortOrder;
 };
