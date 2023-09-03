@@ -26,6 +26,7 @@ const CREATE_INPUT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello",
 };
 const CREATE_RESULT = {
   id: "exampleId",
@@ -35,6 +36,7 @@ const CREATE_RESULT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello",
 };
 const FIND_MANY_RESULT = [
   {
@@ -45,6 +47,7 @@ const FIND_MANY_RESULT = [
     lastName: "exampleLastName",
     username: "exampleUsername",
     password: "examplePassword",
+    hello: "exampleHello",
   },
 ];
 const FIND_ONE_RESULT = {
@@ -55,6 +58,7 @@ const FIND_ONE_RESULT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello",
 };
 
 const service = {
@@ -180,7 +184,7 @@ describe("User", () => {
   });
 
   test("POST /users existing resource", async () => {
-    let agent = request(app.getHttpServer());
+    const agent = request(app.getHttpServer());
     await agent
       .post("/users")
       .send(CREATE_INPUT)
