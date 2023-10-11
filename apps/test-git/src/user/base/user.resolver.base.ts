@@ -39,11 +39,9 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
-    possession: "any",
+    possession: "any"
   })
-  async _usersMeta(
-    @graphql.Args() args: UserCountArgs
-  ): Promise<MetaQueryPayload> {
+  async _usersMeta(@graphql.Args() args: UserCountArgs): Promise<MetaQueryPayload> {
     const result = await this.service.count(args);
     return {
       count: result,
@@ -55,7 +53,7 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
-    possession: "any",
+    possession: "any"
   })
   async users(@graphql.Args() args: UserFindManyArgs): Promise<User[]> {
     return this.service.findMany(args);
@@ -66,7 +64,7 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
-    possession: "own",
+    possession: "own"
   })
   async user(@graphql.Args() args: UserFindUniqueArgs): Promise<User | null> {
     const result = await this.service.findOne(args);
@@ -81,7 +79,7 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "create",
-    possession: "any",
+    possession: "any"
   })
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
     return await this.service.create({
@@ -95,7 +93,7 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
-    possession: "any",
+    possession: "any"
   })
   async updateUser(@graphql.Args() args: UpdateUserArgs): Promise<User | null> {
     try {
@@ -117,7 +115,7 @@ export class UserResolverBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "delete",
-    possession: "any",
+    possession: "any"
   })
   async deleteUser(@graphql.Args() args: DeleteUserArgs): Promise<User | null> {
     try {

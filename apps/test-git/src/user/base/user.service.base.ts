@@ -44,8 +44,8 @@ export class UserServiceBase {
 
       data: {
         ...args.data,
-        password: await this.passwordService.hash(args.data.password),
-      },
+        password: await this.passwordService.hash(args.data.password)
+      }
     });
   }
   async update<T extends Prisma.UserUpdateArgs>(
@@ -57,13 +57,11 @@ export class UserServiceBase {
       data: {
         ...args.data,
 
-        password:
-          args.data.password &&
-          (await transformStringFieldUpdateInput(
-            args.data.password,
-            (password) => this.passwordService.hash(password)
-          )),
-      },
+        password: args.data.password && (await transformStringFieldUpdateInput(
+                      args.data.password,
+                      (password) => this.passwordService.hash(password)
+                    ))
+      }
     });
   }
   async delete<T extends Prisma.UserDeleteArgs>(
