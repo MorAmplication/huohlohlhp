@@ -1,10 +1,5 @@
 import { Test } from "@nestjs/testing";
-import {
-  INestApplication,
-  HttpStatus,
-  ExecutionContext,
-  CallHandler,
-} from "@nestjs/common";
+import { INestApplication, HttpStatus, ExecutionContext, CallHandler } from "@nestjs/common";
 import request from "supertest";
 import { MorganModule } from "nest-morgan";
 import { ACGuard } from "nest-access-control";
@@ -26,6 +21,7 @@ const CREATE_INPUT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello"
 };
 const CREATE_RESULT = {
   id: "exampleId",
@@ -35,18 +31,18 @@ const CREATE_RESULT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello"
 };
-const FIND_MANY_RESULT = [
-  {
-    id: "exampleId",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    firstName: "exampleFirstName",
-    lastName: "exampleLastName",
-    username: "exampleUsername",
-    password: "examplePassword",
-  },
-];
+const FIND_MANY_RESULT = [{
+  id: "exampleId",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  firstName: "exampleFirstName",
+  lastName: "exampleLastName",
+  username: "exampleUsername",
+  password: "examplePassword",
+  hello: "exampleHello"
+}];
 const FIND_ONE_RESULT = {
   id: "exampleId",
   createdAt: new Date(),
@@ -55,6 +51,7 @@ const FIND_ONE_RESULT = {
   lastName: "exampleLastName",
   username: "exampleUsername",
   password: "examplePassword",
+  hello: "exampleHello"
 };
 
 const service = {
@@ -138,23 +135,21 @@ describe("User", () => {
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
-        ...CREATE_RESULT,
-        createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
-      });
+      ...CREATE_RESULT,
+      createdAt: CREATE_RESULT.createdAt.toISOString(),
+      updatedAt: CREATE_RESULT.updatedAt.toISOString()
+    });
   });
 
   test("GET /users", async () => {
     await request(app.getHttpServer())
       .get("/users")
       .expect(HttpStatus.OK)
-      .expect([
-        {
-          ...FIND_MANY_RESULT[0],
-          createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
-          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
-        },
-      ]);
+      .expect([{
+      ...FIND_MANY_RESULT[0],
+      createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+      updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString()
+    }]);
   });
 
   test("GET /users/:id non existing", async () => {
@@ -173,23 +168,23 @@ describe("User", () => {
       .get(`${"/users"}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
-        ...FIND_ONE_RESULT,
-        createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
-        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
-      });
+      ...FIND_ONE_RESULT,
+      createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+      updatedAt: FIND_ONE_RESULT.updatedAt.toISOString()
+    });
   });
 
   test("POST /users existing resource", async () => {
-    let agent = request(app.getHttpServer());
+    const agent = request(app.getHttpServer());
     await agent
       .post("/users")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
-        ...CREATE_RESULT,
-        createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
-      })
+      ...CREATE_RESULT,
+      createdAt: CREATE_RESULT.createdAt.toISOString(),
+      updatedAt: CREATE_RESULT.updatedAt.toISOString()
+    })
       .then(function () {
         agent
           .post("/users")

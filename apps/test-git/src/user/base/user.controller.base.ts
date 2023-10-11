@@ -41,10 +41,10 @@ export class UserControllerBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "create",
-    possession: "any",
+    possession: "any"
   })
   @swagger.ApiForbiddenResponse({
-    type: errors.ForbiddenException,
+    type: errors.ForbiddenException
   })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.create({
@@ -57,6 +57,7 @@ export class UserControllerBase {
         lastName: true,
         username: true,
         roles: true,
+        hello: true
       },
     });
   }
@@ -68,10 +69,10 @@ export class UserControllerBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
-    possession: "any",
+    possession: "any"
   })
   @swagger.ApiForbiddenResponse({
-    type: errors.ForbiddenException,
+    type: errors.ForbiddenException
   })
   async findMany(@common.Req() request: Request): Promise<User[]> {
     const args = plainToClass(UserFindManyArgs, request.query);
@@ -85,6 +86,7 @@ export class UserControllerBase {
         lastName: true,
         username: true,
         roles: true,
+        hello: true
       },
     });
   }
@@ -96,14 +98,12 @@ export class UserControllerBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
-    possession: "own",
+    possession: "own"
   })
   @swagger.ApiForbiddenResponse({
-    type: errors.ForbiddenException,
+    type: errors.ForbiddenException
   })
-  async findOne(
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<User | null> {
+  async findOne(@common.Param() params: UserWhereUniqueInput): Promise<User | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
@@ -114,6 +114,7 @@ export class UserControllerBase {
         lastName: true,
         username: true,
         roles: true,
+        hello: true
       },
     });
     if (result === null) {
@@ -131,10 +132,10 @@ export class UserControllerBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
-    possession: "any",
+    possession: "any"
   })
   @swagger.ApiForbiddenResponse({
-    type: errors.ForbiddenException,
+    type: errors.ForbiddenException
   })
   async update(
     @common.Param() params: UserWhereUniqueInput,
@@ -152,6 +153,7 @@ export class UserControllerBase {
           lastName: true,
           username: true,
           roles: true,
+          hello: true
         },
       });
     } catch (error) {
@@ -170,14 +172,12 @@ export class UserControllerBase {
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "delete",
-    possession: "any",
+    possession: "any"
   })
   @swagger.ApiForbiddenResponse({
-    type: errors.ForbiddenException,
+    type: errors.ForbiddenException
   })
-  async delete(
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<User | null> {
+  async delete(@common.Param() params: UserWhereUniqueInput): Promise<User | null> {
     try {
       return await this.service.delete({
         where: params,
@@ -189,6 +189,7 @@ export class UserControllerBase {
           lastName: true,
           username: true,
           roles: true,
+          hello: true
         },
       });
     } catch (error) {
